@@ -19,7 +19,7 @@ module.exports = appInfo => {
       // 端口号
       port: '3306',
       // 用户名
-      user: 'admin',
+      user: 'root',
       // 密码
       password: '123456',
       // 数据库名
@@ -56,6 +56,14 @@ module.exports = appInfo => {
   config.validate = {
     // convert: false,
     // validateRoot: false,
+  };
+  // 配置端口号
+  config.cluster = {
+    listen: {
+      path: '',
+      port: 8000,
+      hostname: '0.0.0.1',
+    }
   };
   return {
     ...config,
