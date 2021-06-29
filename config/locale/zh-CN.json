@@ -1,0 +1,8 @@
+{
+	"required": "必须，不能为空",
+	"missing_field": "字段丢失",
+	"should not be empty": "不能为空",
+	"invalid": "无效",
+	"should be an email": "应该是电子邮件格式",
+	"length should bigger than %s": "length should bigger than %s"
+}

@@ -1,7 +1,5 @@
 /* eslint valid-jsdoc: "off" */
-
 'use strict';
-
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -19,7 +17,7 @@ module.exports = appInfo => {
       // 端口号
       port: '3306',
       // 用户名
-      user: 'root',
+      user: 'admin',
       // 密码
       password: '123456',
       // 数据库名
@@ -42,14 +40,15 @@ module.exports = appInfo => {
   const userConfig = {
     // myAppName: 'egg',
   };
-  //添加以下配置，注意位置
+  //允许跨域
   config.security = {
     csrf: {
       enable: false
     },
+    domainWhiteList: ['*']//允许访问接口的白名单
   };
   config.cors = {
-    origin: '*',
+    origin: '*', 
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   };
   // egg-validate 配置
@@ -62,8 +61,25 @@ module.exports = appInfo => {
     listen: {
       path: '',
       port: 8000,
-      hostname: '0.0.0.1',
+      hostname: '127.0.0.1',
     }
+  };
+  const I18n = require('i18n');
+
+  I18n.configure({
+    locales: ['zh-CN'],
+    defaultLocale: 'zh-CN',
+    directory: __dirname + '/locale',
+  });
+
+
+  config.validate = {
+    // convert: false,
+    // validateRoot: false,
+    translate() {
+      const args = Array.prototype.slice.call(arguments);
+      return I18n.__.apply(I18n, args);
+    },
   };
   return {
     ...config,
